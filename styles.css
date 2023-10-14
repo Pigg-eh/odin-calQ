@@ -1,0 +1,27 @@
+*{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+
+div.container {
+    display: flex;
+    flex-direction: column;
+    background-color: darkgrey;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    height: 1000px;
+    width: 800px;
+}
+
+div.display {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 48px;
+    background-color: #003319;
+    height: 100px;
+    width: 600px;
+    padding: 30px;
+}
