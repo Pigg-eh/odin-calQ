@@ -19,9 +19,17 @@ div.container {
 div.display {
     display: flex;
     justify-content: flex-end;
+    font-style: Xenara;
     font-size: 48px;
     background-color: #003319;
     height: 100px;
     width: 600px;
     padding: 30px;
+}
+
+div.buttonsContainer{
+    
+    color: black;
+    height: 700px
+    width: 800px;
 }
