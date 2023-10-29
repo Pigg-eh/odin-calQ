@@ -15,7 +15,6 @@ let buttonArray = function () {
 buttonArray()
 
 
-
 function addNumbers (a, b){
     return a + b
 }
@@ -32,7 +31,4 @@ function divideNumbers(a, b){
     return a/b
 }
 
-console.log(addNumbers (4, 2))
-console.log(subtractNumbers (4, 2))
-console.log(multiplyNumbers(4, 2))
-console.log(divideNumbers (4, 2))
+console.log('hello world')
