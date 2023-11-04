@@ -1,6 +1,6 @@
 {
   "name": "odin-calq",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Calculator web app",
   "main": "scripts.js",
   "scripts": {

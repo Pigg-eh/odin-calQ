@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/Pigg-eh/odin-calQ/compare/v1.0.1...v0.0.2) (2023-11-04)
+
+
+### Bug Fixes
+
+* change version release to 0 ([d29999a](https://github.com/Pigg-eh/odin-calQ/commit/d29999a86d19aa57f93badce8afb9d9baad28de5))
+
 ### 1.0.1 (2023-10-29)
 
 
