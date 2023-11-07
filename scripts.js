@@ -8,9 +8,12 @@ function makeBtnArray  () {
         number.splice ((4+i), 0, i)
     }
     number.push(0)
-    number.push('=')
+    number.splice(7, 0, 'CE')
+    number.splice(11, 0, '=')
+    
 
     console.log (number)
+    
     
 }
 
@@ -95,3 +98,11 @@ function divideNumbers(a, b){
     return a/b
 }
 
+
+/*TO DO
+
+populate display function (change textcontent with an event listener that uses  (e) function)
+
+stores numbers in a function (probably need to use ...args) 
+
+*/
