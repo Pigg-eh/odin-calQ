@@ -51,9 +51,29 @@ let xNumber
 let yNumber
 let operator
 
-function operate (x, y, sign){
-    return `${x} ${sign} ${y}`
+function operate (a, b, operation){
+
+     switch(operation) {
+        
+        case 'add': 
+        addNumbers (a, b)
+        break;
+
+        case 'subtract': 
+        subtractNumbers (a, b)
+        break;
+
+        case 'multiply': 
+        multiplyNumbers (a, b)
+        break;
+
+        case 'divide': 
+        divideNumbers (a, b)
+        break;  
+         }
 }
+
+
 
 
 
@@ -75,4 +95,3 @@ function divideNumbers(a, b){
     return a/b
 }
 
-console.log('hello world')
