@@ -1,8 +1,17 @@
+@font-face {
+    font-family: 'Time';
+    src:
+    local('Time'),
+    url('./media/Time/Time\ Normal/Time Normal.ttf')  
+  }
+
 *{
     display: flex;
     justify-content: center;
     align-items: center; 
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
+
 
 
 div.container {
@@ -19,8 +28,10 @@ div.container {
 div.display {
     display: flex;
     justify-content: flex-end;
-    font-style: Xenara;
-    font-size: 48px;
+    
+    font-size: 120px;
+    font-family: Time;
+
     background-color: #F1FFCC;
     height: 100px;
     width: 600px;
@@ -42,7 +53,9 @@ div.buttonsContainer{
     flex: 1 0 auto;
     color: white;
     background-color: darkslateblue;
+
     font-size: 64px;
+    
     margin: 10px;
     border-style: solid;
     border-width: 1px;
