@@ -1,53 +1,6 @@
 /*DOM MANIPULATION */
-let number = ['+','-', '/', '*', ]
+let displayArray 
 
-makeBtnArray()
-function makeBtnArray  () {
-    //potentially need to use object to add classes
-    for (i = 1; i<10; i++){
-        number.splice ((4+i), 0, i)
-    }
-    number.push(0)
-    number.splice(7, 0, 'CE')
-    number.splice(11, 0, '=')
-    
-
-    console.log (number)
-    
-    
-}
-
-insertBtn()
-function insertBtn () {
-    let buttonQuery = document.querySelector('div.buttonsContainer')
-    for (i=0; i<number.length; i++){
-        makeBtnArray[i] = document.createElement('button')
-        buttonQuery.appendChild(makeBtnArray[i])
-    }
-    addCalcBtnClass()
-}
-
-
-function addCalcBtnClass() {
-    let btnClasses = document.querySelectorAll('div.buttonsContainer>button')
-
-    btnClasses.forEach((btnClass) => {
-        btnClass.classList.add('calcBtn')
-    })
-
-    insertText ()
-}
-
-function insertText (x=0) {
-console.log (number.length)
-
-    let buttonTexts = document.querySelectorAll('.calcBtn')
-
-    buttonTexts.forEach((buttonText) => {
-        buttonText.textContent = number[x];
-        x++;
-    })
-}
 
 /* */
 let xNumber
@@ -76,9 +29,24 @@ function operate (a, b, operation){
          }
 }
 
+getValue()
+function getValue (){ //WORK HERE
+    let valuePointGroup = document.querySelector('button.calcBtn')
 
+    valuePointGroup.addEventListener('click', (e) => {
+        valuePoint = e.target.value;
+        if (!isNaN(valuePoint )) {storeDisplay (valuePoint)}
+    }) 
+    /*
+    -store value until operator is pressed 
+    -store into storeDisplay function 
+    -
+    */
+}
 
-
+function storeDisplay (...numberCell){
+    console.log(numberCell)
+} //check on this too 
 
 /*CALCULATOR OPERATIONS */
 
