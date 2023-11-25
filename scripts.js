@@ -1,11 +1,8 @@
-/*DOM MANIPULATION */
-let displayArray 
-
-
-/* */
 let xNumber
 let yNumber
 let operator
+
+let storedValues = [];
 
 function operate (a, b, operation){
 
@@ -31,22 +28,29 @@ function operate (a, b, operation){
 
 getValue()
 function getValue (){ //WORK HERE
-    let valuePointGroup = document.querySelector('button.calcBtn')
+    let valuePointGroup = document.querySelectorAll('button.calcBtn')
+    
+    valuePointGroup.forEach((valuePoint) => {
+        valuePoint.addEventListener('click', (e) => {
+            let clickedValue = e.target.textContent;
 
-    valuePointGroup.addEventListener('click', (e) => {
-        valuePoint = e.target.value;
-        if (!isNaN(valuePoint )) {storeDisplay (valuePoint)}
+            if (!isNaN(clickedValue)) {
+                storeDisplay(clickedValue);
+            }
+        }) 
     }) 
     /*
-    -store value until operator is pressed 
-    -store into storeDisplay function 
-    -
+    
     */
 }
 
-function storeDisplay (...numberCell){
-    console.log(numberCell)
-} //check on this too 
+function storeDisplay(numberCell) {
+    storedValues.push(numberCell);
+    console.log(storedValues); // Check the stored values in the console
+    // You can perform other operations with storedValues here
+    
+} //just change to a string/value i can use with another function
+
 
 /*CALCULATOR OPERATIONS */
 
