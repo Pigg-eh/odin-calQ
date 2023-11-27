@@ -39,18 +39,20 @@ function getClickValue (callback){
 
             if (!isNaN(clickedValue)) {
                 if(storedValues.length < 8){
-                callback(clickedValue);
+                let processedValue = callback(clickedValue); // Get the processed value
+                showDisplay (processedValue);// Display the processed value
                 }
             }
         }) 
     }) 
-} //callback works well here to reuse the stringify function
+} 
 
 function storeDisplay(numberCell) {
     storedValues.push(numberCell);
-    stringify(storedValues);
-    
-} //just change to a string/value i can use with another function
+    return stringify(storedValues); // Return the processed value
+        // You can perform other operations with storedValues here
+
+} 
 
 
 /*CALCULATOR OPERATIONS */
@@ -75,7 +77,8 @@ function divideNumbers(a, b){
 
 function stringify (array){
     catalyst = array.join('')
-    showDisplay(catalyst)
+    return catalyst // Return the processed string
+    
 }
 
 
