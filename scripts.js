@@ -29,8 +29,8 @@ function operate (a, b, operation){
          }
 }
 
-getValue()
-function getValue (){ //WORK HERE
+getClickValue()
+function getClickValue (){
     let valuePointGroup = document.querySelectorAll('button.calcBtn')
     
     valuePointGroup.forEach((valuePoint) => {
@@ -38,17 +38,17 @@ function getValue (){ //WORK HERE
             let clickedValue = e.target.textContent;
 
             if (!isNaN(clickedValue)) {
+                if(storedValues.length < 8){
                 storeDisplay(clickedValue);
+                }
             }
         }) 
     }) 
-   
 }
 
 function storeDisplay(numberCell) {
     storedValues.push(numberCell);
     stringify(storedValues);
-    console.log(storedValues); // Check the stored values in the console
     // You can perform other operations with storedValues here
     
 } //just change to a string/value i can use with another function
@@ -72,7 +72,7 @@ function divideNumbers(a, b){
     return a/b
 }
 
-//Display
+//Screen Display
 
 function stringify (array){
     catalyst = array.join('')
