@@ -1,8 +1,11 @@
 let xNumber
 let yNumber
 let operator
+let catalyst
 
 let storedValues = [];
+
+//Calculator mechanics
 
 function operate (a, b, operation){
 
@@ -39,13 +42,12 @@ function getValue (){ //WORK HERE
             }
         }) 
     }) 
-    /*
-    
-    */
+   
 }
 
 function storeDisplay(numberCell) {
     storedValues.push(numberCell);
+    stringify(storedValues);
     console.log(storedValues); // Check the stored values in the console
     // You can perform other operations with storedValues here
     
@@ -70,10 +72,22 @@ function divideNumbers(a, b){
     return a/b
 }
 
+//Display
+
+function stringify (array){
+    catalyst = array.join('')
+    showDisplay(catalyst)
+}
+
+
+function showDisplay(screenText){
+    let screenDisplay = document.querySelector('div.display')
+
+    screenDisplay.textContent = screenText
+}
 
 /*TO DO
 
-populate display function (change textcontent with an event listener that uses  (e) function)
 
 stores numbers in a function (probably need to use ...args) 
 
