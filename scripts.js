@@ -29,8 +29,8 @@ function operate (a, b, operation){
          }
 }
 
-getClickValue()
-function getClickValue (){
+getClickValue(storeDisplay) //pass a function as an argument
+function getClickValue (callback){
     let valuePointGroup = document.querySelectorAll('button.calcBtn')
     
     valuePointGroup.forEach((valuePoint) => {
@@ -39,17 +39,16 @@ function getClickValue (){
 
             if (!isNaN(clickedValue)) {
                 if(storedValues.length < 8){
-                storeDisplay(clickedValue);
+                callback(clickedValue);
                 }
             }
         }) 
     }) 
-}
+} //callback works well here to reuse the stringify function
 
 function storeDisplay(numberCell) {
     storedValues.push(numberCell);
     stringify(storedValues);
-    // You can perform other operations with storedValues here
     
 } //just change to a string/value i can use with another function
 
@@ -87,7 +86,6 @@ function showDisplay(screenText){
 }
 
 /*TO DO
-
 
 stores numbers in a function (probably need to use ...args) 
 
