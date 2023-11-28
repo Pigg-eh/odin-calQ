@@ -1,7 +1,8 @@
 let xNumber
 let yNumber
 let operator
-let catalyst
+let processedString
+let processedNum
 
 let storedValues = [];
 
@@ -49,8 +50,7 @@ function getClickValue (callback){
 
 function storeDisplay(numberCell) {
     storedValues.push(numberCell);
-    return stringify(storedValues); // Return the processed value
-        // You can perform other operations with storedValues here
+    return stringify(storedValues); 
 
 } 
 
@@ -76,9 +76,13 @@ function divideNumbers(a, b){
 //Screen Display
 
 function stringify (array){
-    catalyst = array.join('')
-    return catalyst // Return the processed string
-    
+    processedString = array.join('')
+    return processedString 
+} //use numerize on the display and squash the processed bit
+
+function numerize (string){
+    processedNum = +string
+    return processedNum
 }
 
 
@@ -90,6 +94,6 @@ function showDisplay(screenText){
 
 /*TO DO
 
-stores numbers in a function (probably need to use ...args) 
+work with numerize function
 
 */
