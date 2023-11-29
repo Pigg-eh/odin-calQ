@@ -1,37 +1,39 @@
 let xNumber
 let yNumber
-let operator
-let processedString
+let operatorSign
 let processedNum
+let tempAns
 
 let storedValues = [];
 
 //Calculator mechanics
 
-function operate (a, b, operation){
+
+
+function operate (a, b, operation){ //callback b
 
      switch(operation) {
         
-        case 'add': 
+        case '+': 
         addNumbers (a, b)
         break;
 
-        case 'subtract': 
+        case '-': 
         subtractNumbers (a, b)
         break;
 
-        case 'multiply': 
+        case '*': 
         multiplyNumbers (a, b)
         break;
 
-        case 'divide': 
+        case '/': 
         divideNumbers (a, b)
         break;  
          }
 }
 
-getClickValue(storeDisplay) //pass a function as an argument
-function getClickValue (callback){
+getDigit(storeDisplay) //pass a function as an argument
+function getDigit (callback){
     let valuePointGroup = document.querySelectorAll('button.calcBtn')
     
     valuePointGroup.forEach((valuePoint) => {
@@ -48,11 +50,31 @@ function getClickValue (callback){
     }) 
 } 
 
+decideOperation (getDigit) 
+function decideOperation (callback){
+    let operationSelector = document.querySelectorAll('button.operator')
+
+    operationSelector.forEach((operationNode)=> {
+        operationNode.addEventListener('click', (e) => {
+            operatorSign = e.target.textContent;
+            storedValues = []
+            
+            
+            let processedFunction = callback(xNumber) //callback typeError, also comes back as undefined
+            getDigit(processedFunction) // need to refactor code in a way that makes it accept whatever this is calling
+
+            
+
+        })
+    })//HERE
+} 
+
 function storeDisplay(numberCell) {
     storedValues.push(numberCell);
-    return stringify(storedValues); 
+    return numerize(storedValues); 
 
 } 
+
 
 
 /*CALCULATOR OPERATIONS */
@@ -75,13 +97,10 @@ function divideNumbers(a, b){
 
 //Screen Display
 
-function stringify (array){
-    processedString = array.join('')
-    return processedString 
-} //use numerize on the display and squash the processed bit
-
-function numerize (string){
-    processedNum = +string
+function numerize (array){
+    let processedString = array.join('')
+    processedNum = +processedString
+    xNumber = processedNum //might need to be somewhere else
     return processedNum
 }
 
@@ -93,7 +112,14 @@ function showDisplay(screenText){
 }
 
 /*TO DO
+Define xNumber and yNumber within your functions or pass them as arguments when
+calling the callback functions.
 
-work with numerize function
+Ensure that the callback functions (getDigit, decideOperation) handle their
+arguments correctly and have the necessary variables defined or passed as 
+arguments.
 
+Utilize the return values from the arithmetic functions (addNumbers, 
+subtractNumbers, etc.) within the operate function and assign the result to a 
+variable or use it accordingly.
 */
