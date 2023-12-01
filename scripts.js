@@ -41,7 +41,7 @@ function getDigit (callback){
             let clickedValue = e.target.textContent;
 
             if (!isNaN(clickedValue)) {
-                if(storedValues.length < 8){
+                if(storedValues.length <= 8){
                 let processedValue = callback(clickedValue); // Get the processed value
                 showDisplay (processedValue);// Display the processed value
                 }
@@ -50,8 +50,8 @@ function getDigit (callback){
     }) 
 } 
 
-decideOperation (getDigit) 
-function decideOperation (callback){
+decideOperation () 
+function decideOperation (){
     let operationSelector = document.querySelectorAll('button.operator')
 
     operationSelector.forEach((operationNode)=> {
@@ -60,8 +60,8 @@ function decideOperation (callback){
             storedValues = []
             
             
-            let processedFunction = callback(xNumber) //callback typeError, also comes back as undefined
-            getDigit(processedFunction) // need to refactor code in a way that makes it accept whatever this is calling
+            storeDisplay(storedValues) //it was adding more event listeners so I called something that needed to called later again
+            //getDigit(processedFunction) // need to refactor code in a way that makes it accept whatever this is calling
 
             
 
@@ -112,14 +112,5 @@ function showDisplay(screenText){
 }
 
 /*TO DO
-Define xNumber and yNumber within your functions or pass them as arguments when
-calling the callback functions.
-
-Ensure that the callback functions (getDigit, decideOperation) handle their
-arguments correctly and have the necessary variables defined or passed as 
-arguments.
-
-Utilize the return values from the arithmetic functions (addNumbers, 
-subtractNumbers, etc.) within the operate function and assign the result to a 
-variable or use it accordingly.
+ //fix digit length on the screen
 */
