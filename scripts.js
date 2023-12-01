@@ -4,7 +4,7 @@ let operatorSign
 let processedNum
 let tempAns
 
-let storedValues = [];
+let storedValues = [0];
 
 //Calculator mechanics
 
