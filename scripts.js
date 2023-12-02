@@ -6,32 +6,7 @@ let tempAns
 
 let storedValues = [0];
 
-//Calculator mechanics
-
-
-
-function operate (a, b, operation){ //callback b
-
-     switch(operation) {
-        
-        case '+': 
-        addNumbers (a, b)
-        break;
-
-        case '-': 
-        subtractNumbers (a, b)
-        break;
-
-        case '*': 
-        multiplyNumbers (a, b)
-        break;
-
-        case '/': 
-        divideNumbers (a, b)
-        break;  
-         }
-}
-
+//eventListeners
 getDigit(storeDisplay) //pass a function as an argument
 function getDigit (callback){
     let valuePointGroup = document.querySelectorAll('button.calcBtn')
@@ -42,8 +17,8 @@ function getDigit (callback){
 
             if (!isNaN(clickedValue)) {
                 if(storedValues.length <= 8){
-                let processedValue = callback(clickedValue); // Get the processed value
-                showDisplay (processedValue);// Display the processed value
+                let processedValue = callback(clickedValue); 
+                showDisplay (processedValue);
                 }
             }
         }) 
@@ -60,13 +35,10 @@ function decideOperation (){
             storedValues = []
             
             
-            storeDisplay(storedValues) //it was adding more event listeners so I called something that needed to called later again
-            //getDigit(processedFunction) // need to refactor code in a way that makes it accept whatever this is calling
-
+            storeDisplay(storedValues) 
             
-
         })
-    })//HERE
+    })
 } 
 
 function storeDisplay(numberCell) {
@@ -75,17 +47,38 @@ function storeDisplay(numberCell) {
 
 } 
 
+//Calculator mechanics
+function operate (a, b, operation){ 
+
+    switch(operation) {
+       
+       case '+': 
+       addNumbers (a, b)
+       break;
+
+       case '-': 
+       subtractNumbers (a, b)
+       break;
+
+       case '*': 
+       multiplyNumbers (a, b)
+       break;
+
+       case '/': 
+       divideNumbers (a, b)
+       break;  
+        }
+}
 
 
-/*CALCULATOR OPERATIONS */
-
+/*CALCULATOR OPERATIONS */ 
 function addNumbers (a, b){
     return a + b
 }
 
 function subtractNumbers(a, b){
     return a - b
-}
+}   
 
 function multiplyNumbers(a, b){
     return a * b
@@ -100,7 +93,7 @@ function divideNumbers(a, b){
 function numerize (array){
     let processedString = array.join('')
     processedNum = +processedString
-    xNumber = processedNum //might need to be somewhere else
+    xNumber = processedNum 
     return processedNum
 }
 
@@ -112,5 +105,5 @@ function showDisplay(screenText){
 }
 
 /*TO DO
- //fix digit length on the screen
+ 
 */
