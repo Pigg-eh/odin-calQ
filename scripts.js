@@ -1,54 +1,30 @@
-let xNumber
-let yNumber
+let globalAnsB = 0 //should be 2nd
+let globalAnsA = 0 //should be 1st
 let operatorSign
 let processedNum
-let tempAns
 
-let storedValues = [0];
+let storedValues = [0]
+let memoryArray = [0]
 
-//Calculator mechanics
-
-
-
-function operate (a, b, operation){ //callback b
-
-     switch(operation) {
-        
-        case '+': 
-        addNumbers (a, b)
-        break;
-
-        case '-': 
-        subtractNumbers (a, b)
-        break;
-
-        case '*': 
-        multiplyNumbers (a, b)
-        break;
-
-        case '/': 
-        divideNumbers (a, b)
-        break;  
-         }
-}
-
-getDigit(storeDisplay) //pass a function as an argument
+//eventListeners
+getDigit(storeDisplay) 
 function getDigit (callback){
     let valuePointGroup = document.querySelectorAll('button.calcBtn')
     
     valuePointGroup.forEach((valuePoint) => {
         valuePoint.addEventListener('click', (e) => {
-            let clickedValue = e.target.textContent;
+            let clickedValue = +e.target.textContent;
 
             if (!isNaN(clickedValue)) {
                 if(storedValues.length <= 8){
-                let processedValue = callback(clickedValue); // Get the processed value
-                showDisplay (processedValue);// Display the processed value
+                    let processedValue = callback(clickedValue); 
+                    showDisplay (processedValue);
                 }
             }
         }) 
     }) 
 } 
+
 
 decideOperation () 
 function decideOperation (){
@@ -56,36 +32,71 @@ function decideOperation (){
 
     operationSelector.forEach((operationNode)=> {
         operationNode.addEventListener('click', (e) => {
+            
+            
+            globalAnsA = globalAnsB // should go here
             operatorSign = e.target.textContent;
-            storedValues = []
+            storedValues = [0]
             
-            
-            storeDisplay(storedValues) //it was adding more event listeners so I called something that needed to called later again
-            //getDigit(processedFunction) // need to refactor code in a way that makes it accept whatever this is calling
-
-            
-
+            console.log (`type ${typeof(memoryArray[memoryArray.length-1])}`)
+            console.log(`memoryArray last# ${memoryArray[memoryArray.length-1]}`)
+            globalAnsB = operate(globalAnsA, memoryArray[memoryArray.length-1], operatorSign)
+            pushMemory (globalAnsA) 
+            showDisplay(globalAnsB)
+           
+ 
         })
-    })//HERE
+    })
 } 
 
+
+//Calculator mechanics
+function operate (a, b, operation){ 
+    switch(operation) {
+        
+        case '+': 
+        globalAnsB = addNumbers (a, b)
+        break;
+
+        case '-': 
+        globalAnsB = subtractNumbers (a, b)
+
+        break;
+
+        case '*': 
+        globalAnsB = multiplyNumbers (a, b)
+        break;
+
+        case '/': 
+        globalAnsB = divideNumbers (a, b)
+        break;  
+        } 
+        return globalAnsB
+        
+}
+
+
+//Array allocation
 function storeDisplay(numberCell) {
     storedValues.push(numberCell);
     return numerize(storedValues); 
 
 } 
 
+function pushMemory (tempNum) {
+    memoryArray.push(tempNum) //returns as an array of arrays for some reason
+} 
 
 
-/*CALCULATOR OPERATIONS */
 
+/*CALCULATOR OPERATIONS */ 
 function addNumbers (a, b){
     return a + b
 }
 
 function subtractNumbers(a, b){
     return a - b
-}
+}   
 
 function multiplyNumbers(a, b){
     return a * b
@@ -96,21 +107,27 @@ function divideNumbers(a, b){
 }
 
 //Screen Display
-
 function numerize (array){
     let processedString = array.join('')
     processedNum = +processedString
-    xNumber = processedNum //might need to be somewhere else
+    globalAnsB = processedNum 
     return processedNum
 }
 
 
 function showDisplay(screenText){
     let screenDisplay = document.querySelector('div.display')
-
+    
     screenDisplay.textContent = screenText
+
+    
+
 }
 
+
 /*TO DO
- //fix digit length on the screen
+ -operate should be hooked up 
+ -should operate when equals sign is hit
+ -should also operate when operators are hit
+ -store all values in a array linked with a function 
 */
