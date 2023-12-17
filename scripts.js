@@ -1,14 +1,17 @@
 let globalAnsB = 0 //should be 2nd
 let globalAnsA = 0 //should be 1st
-let operatorSign
+let operatorSign = 0 
 let processedNum
 
-let storedValues = [0]
-let memoryArray = [0]
 
+let storedValues = [0]
+
+let memoryArray = [0]
+let memoryArrayLast = 0
+let tempMemory = 0
 //eventListeners
-getDigit(storeDisplay) 
-function getDigit (callback){
+addDigitListeners(storeDisplay) 
+function addDigitListeners (callback){
     let valuePointGroup = document.querySelectorAll('button.calcBtn')
     
     valuePointGroup.forEach((valuePoint) => {
@@ -26,52 +29,83 @@ function getDigit (callback){
 } 
 
 
-decideOperation () 
-function decideOperation (){
+addOperationListeners () 
+function addOperationListeners (){
     let operationSelector = document.querySelectorAll('button.operator')
 
     operationSelector.forEach((operationNode)=> {
         operationNode.addEventListener('click', (e) => {
-            
-            
-            globalAnsA = globalAnsB // should go here
+
             operatorSign = e.target.textContent;
-            storedValues = [0]
             
-            console.log (`type ${typeof(memoryArray[memoryArray.length-1])}`)
-            console.log(`memoryArray last# ${memoryArray[memoryArray.length-1]}`)
-            globalAnsB = operate(globalAnsA, memoryArray[memoryArray.length-1], operatorSign)
-            pushMemory (globalAnsA) 
-            showDisplay(globalAnsB)
-           
- 
+            handleOperations ()
         })
     })
 } 
 
 
+addEqualsListeners ()
+function addEqualsListeners () {
+    let equalsSelector = document.querySelector('button.equals')
+
+    equalsSelector.addEventListener('click', () => {
+        handleOperations()
+    })
+}
+
+
+function handleOperations (){
+    globalAnsA = globalAnsB 
+    storedValues = [0]
+
+    if(memoryArray.length > 0){
+    memoryArrayLast = memoryArray[memoryArray.length-1]
+} else {
+        memoryArray[0] = globalAnsB
+    }
+
+    checkInitial () //should be callback
+
+}
+
+function checkInitial (){
+
+    if (memoryArray.length > 1){
+        globalAnsB = operate(globalAnsA, memoryArrayLast, operatorSign) //change to callback 
+    } else {
+        memoryArray [1] = globalAnsB
+    }
+
+    pushMemory (globalAnsB)
+    showDisplay(globalAnsB) // might need to change to memoryArrayLast
+
+    
+    console.log(memoryArray )
+}
+
+
 //Calculator mechanics
 function operate (a, b, operation){ 
+    let result
+
     switch(operation) {
-        
         case '+': 
-        globalAnsB = addNumbers (a, b)
+        result = addNumbers (a, b)
         break;
 
         case '-': 
-        globalAnsB = subtractNumbers (a, b)
-
+        result = subtractNumbers (a, b)
         break;
 
         case '*': 
-        globalAnsB = multiplyNumbers (a, b)
+        result = multiplyNumbers (a, b)
         break;
 
         case '/': 
-        globalAnsB = divideNumbers (a, b)
+        result = divideNumbers (a, b)
         break;  
         } 
-        return globalAnsB
+        return result
         
 }
 
@@ -84,9 +118,8 @@ function storeDisplay(numberCell) {
 } 
 
 function pushMemory (tempNum) {
-    memoryArray.push(tempNum) //returns as an array of arrays for some reason
+    memoryArray.push(tempNum) 
 } 
-
 
 
 /*CALCULATOR OPERATIONS */ 
@@ -95,7 +128,8 @@ function addNumbers (a, b){
 }
 
 function subtractNumbers(a, b){
-    return a - b
+    console.log(`b parameter: ${b}`) //debug
+    return b - a
 }   
 
 function multiplyNumbers(a, b){
@@ -103,7 +137,8 @@ function multiplyNumbers(a, b){
 }
 
 function divideNumbers(a, b){
-    return a/b
+    return b/a
+    //error should just go to another function
 }
 
 //Screen Display
@@ -123,11 +158,14 @@ function showDisplay(screenText){
     
 
 }
+/*
+BUGS
+-when switching signs it automatically does the operation
+-division needs to be worked on 
 
-
-/*TO DO
- -operate should be hooked up 
+TO DO
  -should operate when equals sign is hit
- -should also operate when operators are hit
- -store all values in a array linked with a function 
+ -division limits to a few digits
+ -properly link memory array functions
+ -maybe needs a failsafe for the first iteration of the operations 
 */
