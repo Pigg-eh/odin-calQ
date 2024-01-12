@@ -9,6 +9,8 @@ let storedValues = [0]
 let memoryArray = [0]
 let memoryArrayLast = 0
 let tempMemory = 0
+let operatorSelected = false
+
 //eventListeners
 addDigitListeners(storeDisplay) 
 function addDigitListeners (callback){
@@ -22,6 +24,9 @@ function addDigitListeners (callback){
                 if(storedValues.length <= 8){
                     let processedValue = callback(clickedValue); 
                     showDisplay (processedValue);
+                        if(memoryArray.length > 0){
+                            operatorSelected = false
+                        }
                 }
             }
         }) 
@@ -36,9 +41,12 @@ function addOperationListeners (){
     operationSelector.forEach((operationNode)=> {
         operationNode.addEventListener('click', (e) => {
 
-            operatorSign = e.target.textContent;
-            
-            handleOperations ()
+            if(!operatorSelected) {
+                operatorSign = e.target.textContent;
+                       
+                handleOperations ()
+                operatorSelected = true
+            }
         })
     })
 } 
@@ -60,9 +68,7 @@ function handleOperations (){
 
     if(memoryArray.length > 0){
     memoryArrayLast = memoryArray[memoryArray.length-1]
-} else {
-        memoryArray[0] = globalAnsB
-    }
+}
 
     checkInitial () //should be callback
 
@@ -72,9 +78,7 @@ function checkInitial (){
 
     if (memoryArray.length > 1){
         globalAnsB = operate(globalAnsA, memoryArrayLast, operatorSign) //change to callback 
-    } else {
-        memoryArray [1] = globalAnsB
-    }
+    } 
 
     pushMemory (globalAnsB)
     showDisplay(globalAnsB) // might need to change to memoryArrayLast
@@ -105,6 +109,7 @@ function operate (a, b, operation){
         result = divideNumbers (a, b)
         break;  
         } 
+        
         return result
         
 }
@@ -160,7 +165,6 @@ function showDisplay(screenText){
 }
 /*
 BUGS
--when switching signs it automatically does the operation
 -division needs to be worked on 
 
 TO DO
