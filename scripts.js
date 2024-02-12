@@ -8,7 +8,7 @@ let storedValues = [0]
 
 let memoryArray = [0]
 let memoryArrayLast = 0
-let tempMemory = 0
+let tempAns = 0
 let operatorSelected = false
 
 //eventListeners
@@ -63,7 +63,7 @@ function addEqualsListeners () {
 
 
 function handleOperations (){
-    globalAnsA = globalAnsB 
+    //globalAnsA = globalAnsB 
     storedValues = [0]
 
     if(memoryArray.length > 0){
@@ -76,15 +76,22 @@ function handleOperations (){
 
 function checkInitial (){
 
-    if (memoryArray.length > 1){
-        globalAnsB = operate(globalAnsA, memoryArrayLast, operatorSign) //change to callback 
-    } 
-
-    pushMemory (globalAnsB)
-    showDisplay(globalAnsB) // might need to change to memoryArrayLast
-
+    if (memoryArray.length > 0){
+        tempAns = operate(globalAnsA, globalAnsB, operatorSign)
+        globalAnsA = tempAns    
+        pushMemory (tempAns)
+        showDisplay(tempAns)
+    } else {
+        pushMemory (globalAnsB)
+        showDisplay (globalAnsB)
+    }
+      
     
-    console.log(memoryArray )
+    
+     // might need to change to memoryArrayLast
+    
+    
+    console.log(memoryArray)
 }
 
 
@@ -134,7 +141,11 @@ function addNumbers (a, b){
 
 function subtractNumbers(a, b){
     console.log(`b parameter: ${b}`) //debug
-    return b - a
+    if (memoryArray.length > 1){
+        return a - b
+    }else {
+        return globalAnsB
+    }
 }   
 
 function multiplyNumbers(a, b){
@@ -165,7 +176,9 @@ function showDisplay(screenText){
 }
 /*
 BUGS
+-operate is done after**
 -division needs to be worked on 
+
 
 TO DO
  -should operate when equals sign is hit
