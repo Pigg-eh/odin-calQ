@@ -1,13 +1,13 @@
 let globalAnsB = 0 //should be 2nd
 let globalAnsA = 0 //should be 1st
-let operatorSign = 0 
+let operatorSignLock = 0
+let operatorSign = 0
 let processedNum
 
 
 let storedValues = [0]
 
 let memoryArray = [0]
-let memoryArrayLast = 0
 let tempAns = 0
 let operatorSelected = false
 
@@ -19,6 +19,7 @@ function addDigitListeners (callback){
     valuePointGroup.forEach((valuePoint) => {
         valuePoint.addEventListener('click', (e) => {
             let clickedValue = +e.target.textContent;
+            
 
             if (!isNaN(clickedValue)) {
                 if(storedValues.length <= 8){
@@ -42,11 +43,17 @@ function addOperationListeners (){
         operationNode.addEventListener('click', (e) => {
 
             if(!operatorSelected) {
+                manipulateSign ()
                 operatorSign = e.target.textContent;
-                       
-                handleOperations ()
+                
+                //handleOperations ()
+                
+                handleOperands ()
+
                 operatorSelected = true
-            }
+
+
+            } 
         })
     })
 } 
@@ -57,41 +64,42 @@ function addEqualsListeners () {
     let equalsSelector = document.querySelector('button.equals')
 
     equalsSelector.addEventListener('click', () => {
+
+        manipulateSign ()
         handleOperations()
     })
 }
 
+function handleOperands () {
+    storedValues = [0]
+    if(memoryArray < 2) {
+        pushMemory (globalAnsB)
+        globalAnsA = globalAnsB
+        showDisplay(operatorSign)
+    }else{
+        handleOperations()
+        globalAnsA = tempAns
+        
+    }
+}
+
+function manipulateSign () {
+    if(operatorSign != 0){operatorSignLock = operatorSign}
+}
 
 function handleOperations (){
-    //globalAnsA = globalAnsB 
+
     storedValues = [0]
-
-    if(memoryArray.length > 0){
-    memoryArrayLast = memoryArray[memoryArray.length-1]
+    runOperation () 
 }
 
-    checkInitial () //should be callback
+function runOperation (){
 
-}
+    
+    tempAns = operate(globalAnsA, globalAnsB, operatorSignLock)
 
-function checkInitial (){
-
-    if (memoryArray.length > 0){
-        tempAns = operate(globalAnsA, globalAnsB, operatorSign)
-        globalAnsA = tempAns    
-        pushMemory (tempAns)
-        showDisplay(tempAns)
-    } else {
-        pushMemory (globalAnsB)
-        showDisplay (globalAnsB)
-    }
-      
-    
-    
-     // might need to change to memoryArrayLast
-    
-    
-    console.log(memoryArray)
+    pushMemory (tempAns)
+    showDisplay(tempAns)
 }
 
 
@@ -121,6 +129,12 @@ function operate (a, b, operation){
         
 }
 
+function clearDigits () {
+    operatorSelected = false
+    operatorSign = 0
+
+}
+
 
 //Array allocation
 function storeDisplay(numberCell) {
@@ -140,12 +154,9 @@ function addNumbers (a, b){
 }
 
 function subtractNumbers(a, b){
-    console.log(`b parameter: ${b}`) //debug
-    if (memoryArray.length > 1){
+    console.log(`b parameter: ${b}`) 
         return a - b
-    }else {
-        return globalAnsB
-    }
+    
 }   
 
 function multiplyNumbers(a, b){
@@ -153,7 +164,7 @@ function multiplyNumbers(a, b){
 }
 
 function divideNumbers(a, b){
-    return b/a
+    return a/b
     //error should just go to another function
 }
 
@@ -176,12 +187,10 @@ function showDisplay(screenText){
 }
 /*
 BUGS
--operate is done after**
 -division needs to be worked on 
 
 
 TO DO
- -should operate when equals sign is hit
  -division limits to a few digits
  -properly link memory array functions
  -maybe needs a failsafe for the first iteration of the operations 
