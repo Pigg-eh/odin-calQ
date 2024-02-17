@@ -154,7 +154,6 @@ function addNumbers (a, b){
 }
 
 function subtractNumbers(a, b){
-    console.log(`b parameter: ${b}`) 
         return a - b
     
 }   
@@ -164,9 +163,16 @@ function multiplyNumbers(a, b){
 }
 
 function divideNumbers(a, b){
-    return a/b
-    //error should just go to another function
+    if(b === 0){
+        return `Please Stop`
+    }else{
+        return (a/b).toFixed(6)
+    }
 }
+
+
+
+
 
 //Screen Display
 function numerize (array){
@@ -187,11 +193,12 @@ function showDisplay(screenText){
 }
 /*
 BUGS
--division needs to be worked on 
-
+-after division keeps number of digits (do the find amount of 
+decimals to keep it the same e.g. tostring.length - tostring.indexOf )
+-equals causes a NaN error, add a boolean to check if equals is safe to press
+the boolean can be placed in the operator listeners 
 
 TO DO
- -division limits to a few digits
- -properly link memory array functions
- -maybe needs a failsafe for the first iteration of the operations 
+-equals hit first causes issues
+-CE button needs functionality 
 */
