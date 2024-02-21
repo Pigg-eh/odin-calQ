@@ -58,6 +58,22 @@ function addOperationListeners (){
     })
 } 
 
+addClearListeners()
+function addClearListeners () {
+    let clearSelector = document.querySelector('button.clear')
+
+    clearSelector.addEventListener ('click', () => {
+        globalAnsB = 0
+        globalAnsA = 0 
+        operatorSignLock = 0
+        operatorSign = 0
+        memoryArray = [0]
+        storedValues = [0]
+        tempAns = 0
+        operatorSelected = false
+        showDisplay('another?')
+    })
+}
 
 addEqualsListeners ()
 function addEqualsListeners () {
