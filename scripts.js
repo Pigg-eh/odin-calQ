@@ -182,11 +182,21 @@ function divideNumbers(a, b){
     if(b === 0){
         return `Please Stop`
     }else{
-        return (a/b).toFixed(6)
+        rawQuotient = a/b
+        return manipulateDecimals (rawQuotient)
     }
 }
 
-
+function manipulateDecimals (rawAns){
+  
+    arrayAns = rawAns.toString()
+    decimalPlace = arrayAns.length - arrayAns.indexOf('.')
+    if (decimalPlace > 7) {
+      decimalPlace = 7
+    }
+          
+      return rawAns.toFixed(decimalPlace - 1)
+  } 
 
 
 
