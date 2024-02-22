@@ -10,6 +10,7 @@ let storedValues = [0]
 let memoryArray = [0]
 let tempAns = 0
 let operatorSelected = false
+let equalsSafe = false
 
 //eventListeners
 addDigitListeners(storeDisplay) 
@@ -51,7 +52,7 @@ function addOperationListeners (){
                 handleOperands ()
 
                 operatorSelected = true
-
+                equalsSafe = true
 
             } 
         })
@@ -71,19 +72,28 @@ function addClearListeners () {
         storedValues = [0]
         tempAns = 0
         operatorSelected = false
+        equalsSafe = false
         showDisplay('another?')
     })
 }
+
+
 
 addEqualsListeners ()
 function addEqualsListeners () {
     let equalsSelector = document.querySelector('button.equals')
 
     equalsSelector.addEventListener('click', () => {
+        checkEquals ()
+        
+    })
+}
 
+function checkEquals () {
+    if (equalsSafe === true){
         manipulateSign ()
         handleOperations()
-    })
+    }
 }
 
 function handleOperands () {
@@ -180,7 +190,7 @@ function multiplyNumbers(a, b){
 
 function divideNumbers(a, b){
     if(b === 0){
-        return `Please Stop`
+        return `*explodes*`
     }else{
         rawQuotient = a/b
         return manipulateDecimals (rawQuotient)
@@ -219,12 +229,10 @@ function showDisplay(screenText){
 }
 /*
 BUGS
--after division keeps number of digits (do the find amount of 
-decimals to keep it the same e.g. tostring.length - tostring.indexOf )
--equals causes a NaN error, add a boolean to check if equals is safe to press
-the boolean can be placed in the operator listeners 
+equals hit first causes issues
+    -equals causes a NaN error, add a boolean to check if equals is safe to press
+    the boolean can be placed in the operator listeners 
 
 TO DO
--equals hit first causes issues
--CE button needs functionality 
+
 */
